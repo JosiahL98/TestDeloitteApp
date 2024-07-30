@@ -1,0 +1,76 @@
+﻿@page
+@model TestDeloitteApp.Pages.NotesModel
+<h2>Notes</h2>
+<div class="row">
+    <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <label style="font-weight: bold">Case ID: </label>
+        @Model.CaseDiary.CaseId
+    </div>
+    <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <label style="font-weight: bold">Function: </label>
+        @Model.CaseDiary.Function
+    </div>
+    <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <label style="font-weight: bold">Sub Function: </label>
+        @Model.CaseDiary.SubFunction
+    </div>
+    <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <label style="font-weight: bold">Start Date: </label>
+        @Model.CaseDiary.StartDate
+    </div>
+    <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <label style="font-weight: bold">Open: </label>
+        @Model.CaseDiary.Open
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <label style="font-weight: bold">Primary Activity: </label>
+        @Model.CaseDiary.Prim
+    </div>
+   
+
+</div>
+<form method="post">
+    <div class="row">
+        <input hidden asp-for="CaseDiaryNote.Id" class="form-control" />
+        <input hidden asp-for="CaseDiaryNote.CaseDiaryId" class="form-control" />
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line1" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line2" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line3" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line4" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line5" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line6" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line7" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line8" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line9" class="form-control" />
+        </div>
+        <div class="col-12">
+            <input asp-for="CaseDiaryNote.Line10" class="form-control" />
+        </div>
+      
+    </div>
+    <div class="row">
+        <button class="btn btn-success">Save</button>
+    </div>
+
+
+</form>

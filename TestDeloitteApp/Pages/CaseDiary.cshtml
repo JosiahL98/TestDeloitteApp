@@ -1,0 +1,130 @@
+﻿@page
+@model TestDeloitteApp.Pages.CaseDiaryModel
+<h2>Case Diary</h2>
+<form method="post">
+    <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-8 col-xs-12 mb-3"> 
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="caseDiarySearch.CaseId" class="form-label"></label>
+                        <input asp-for="caseDiarySearch.CaseId" class="form-control" />
+                        <span asp-validation-for="caseDiarySearch.CaseId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6 d-flex  align-items-end">
+                    <button class="btn btn-success"> Inquire</button>
+                </div>
+                <div class="col-6 d-flex  align-items-end">
+                    <button asp-page-handler="clear" class="btn btn-success"> Clear</button>
+                </div>
+            </div>
+          
+        </div>
+        <h5>Filters</h5>
+        <div class="row">
+            <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group ">
+                    <label asp-for="caseDiarySearch.FunctionType" class="form-label"></label>
+                    <select asp-for="caseDiarySearch.FunctionType" class="form-control" asp-items="Model.FunctionTypes"></select>
+                    <span asp-validation-for="caseDiarySearch.FunctionType" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group ">
+                    <label asp-for="caseDiarySearch.SubFunctionType" class="form-label"></label>
+                    <select asp-for="caseDiarySearch.SubFunctionType" class="form-control" asp-items="Model.SubFunctionTypes"></select>
+                    <span asp-validation-for="caseDiarySearch.SubFunctionType" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group ">
+                    <label asp-for="caseDiarySearch.Open" class="form-label"></label>
+                    <select asp-for="caseDiarySearch.Open" class="form-control" asp-items="Model.YesNoTypes"></select>
+                    <span asp-validation-for="caseDiarySearch.Open" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group ">
+                    <label asp-for="caseDiarySearch.Prim" class="form-label"></label>
+                    <select asp-for="caseDiarySearch.Prim" class="form-control" asp-items="Model.YesNoTypes"></select>
+                    <span asp-validation-for="caseDiarySearch.Prim" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-xl-2 colcol-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group ">
+                    <label asp-for="caseDiarySearch.StartDate" class="form-label"></label>
+                    <input asp-for="caseDiarySearch.StartDate" class="form-control" />
+                    <span asp-validation-for="caseDiarySearch.StartDate" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CaseDiariesList[0].CaseId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CaseDiariesList[0].StartDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CaseDiariesList[0].DueDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CaseDiariesList[0].Function)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CaseDiariesList[0].SubFunction)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CaseDiariesList[0].Open)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CaseDiariesList[0].Prim)
+                        </th>
+                       
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CaseDiariesList)
+                    {
+                        <tr>
+                            <td>
+                                @item.CaseId
+                               
+                            </td>
+                            <td>
+                                @item.StartDate
+                            </td>
+                            <td>
+                                @item.DueDate
+                            </td>
+                            <td>
+                                @item.Function
+                            </td>
+                            <td>
+                                @item.SubFunction
+                            </td>
+                            <td>
+                                @item.Open
+                            </td>
+                            <td>
+                                @item.Prim
+                            </td>
+                            <td>
+                                <a asp-page="/Notes" asp-route-id="@item.Id">Notes</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+          
+        </div>
+    </div>
+    
+    
+    
+</form>
