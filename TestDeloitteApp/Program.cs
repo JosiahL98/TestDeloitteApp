@@ -1,10 +1,16 @@
+using FluentValidation;
+using System;
 using TestDeloitteApp.Data;
+using TestDeloitteApp.Models;
+using TestDeloitteApp.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<TestDeloitteAppContext>();
+builder.Services.AddScoped<IValidator<CaseDiarySearch>, CaseDiarySearchValidator>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

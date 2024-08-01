@@ -1,8 +1,11 @@
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 using System.Text.Json;
@@ -56,10 +59,14 @@ namespace TestDeloitteApp.Pages
         public List<CaseDiary> CaseDiariesList { get; set; }
 
         private readonly TestDeloitteAppContext _context;
-        public CaseDiaryModel(TestDeloitteAppContext context) {
+        private IValidator<CaseDiarySearch> _validator;
+
+        public CaseDiaryModel(TestDeloitteAppContext context, IValidator<CaseDiarySearch> validator) {
             _context = context;
+            _validator = validator;
+
         }
-            
+
 
         public async Task OnGetAsync()
         {
@@ -70,6 +77,7 @@ namespace TestDeloitteApp.Pages
 
             CaseDiariesList = await _context.CaseDiaries.ToListAsync();
         }
+
         public async Task<IActionResult> OnPostAsync()
         {
             
@@ -79,6 +87,24 @@ namespace TestDeloitteApp.Pages
             YesNoTypes.Add(new SelectListItem { Value = "Yes", Text = "Yes" });
             YesNoTypes.Add(new SelectListItem { Value = "No", Text = "No" });
             CaseDiariesList = await _context.CaseDiaries.ToListAsync();
+
+            FluentValidation.Results.ValidationResult result = await _validator.ValidateAsync(caseDiarySearch);
+
+            if (!result.IsValid)
+            {
+                // Copy the validation results into ModelState.
+                // ASP.NET uses the ModelState collection to populate 
+                // error messages in the View.
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+
+                // re-render the view when validation failed.
+                
+            }
+
+
             if (ModelState.IsValid)
             {
                 CaseDiariesList = CaseDiariesList.Where(x => x.CaseId == caseDiarySearch.CaseId).ToList();

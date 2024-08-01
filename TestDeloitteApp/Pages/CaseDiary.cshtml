@@ -11,6 +11,7 @@
                         <input asp-for="caseDiarySearch.CaseId" class="form-control" />
                         <span asp-validation-for="caseDiarySearch.CaseId" class="text-danger"></span>
                     </div>
+                    
                 </div>
                 <div class="col-6 d-flex  align-items-end">
                     <button class="btn btn-success"> Inquire</button>
@@ -128,3 +129,7 @@
     
     
 </form>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
